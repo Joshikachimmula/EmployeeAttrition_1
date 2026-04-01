@@ -1,7 +1,8 @@
 import streamlit as st
 import joblib
-import numpy as np
 import pandas as pd
+import numpy as np
+
 # Load the trained model and label encoder
 model = joblib.load("assests/employee_attrition_model.pkl")
 label_encoder = joblib.load("assests/label_encoder.pkl")
