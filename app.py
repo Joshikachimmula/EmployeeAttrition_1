@@ -2,13 +2,11 @@ import streamlit as st
 import joblib
 import pandas as pd
 import numpy as np
-
-# Load the trained model and label encoder
-model = joblib.load("assests/employee_attrition_model.pkl")
-label_encoder = joblib.load("assests/label_encoder.pkl")
-Feature_columns = joblib.load("assests/feature_columns.pkl")
-st.title("Employee Attrition Prediction")
-st.markdown("Enter the employee details to predict whether they are likely to leave the company.")
+model=joblib.load("assests/employee_attrition_model.pkl")
+label_encoder=joblib.load("assests/label_encoder.pkl")
+feature_columns=joblib.load("assets/feature_columns.pkl")
+st.title("Employee Atrition Prediction")
+st.markdown("Enter the employee details to predit whether they are likely to leave the company.")
 st.sidebar.header("Employee Details")
 def user_input_features():
     inputs={}
@@ -23,26 +21,29 @@ def user_input_features():
                                                        max_value=50, value=10)
     
     data={}
-    for feat in Feature_columns:
+    for feat in feature_columns:
         if feat in inputs:
             data[feat]=inputs[feat]
         else:
             data[feat]=0
     return pd.DataFrame(data, index=[0])
 input_df=user_input_features()
-#input_df['OverTime']=label_encoder['OverTime'].transform(
-    #input_df['OverTime'])
-    input_df['OverTime']=input_df['OverTime'].map({'Yes':1, 'No':0})
-if st.button("predict Attrition"):
+#input_df['OverTime']=label_encoder.transform(input_df['OverTime'])
+input_df['OverTime']=input_df['OverTime'].map({'Yes':1, 'No':0})
+if st.button("Predict Attrition"):
     prediction=model.predict(input_df)
-    if prediction_proba[0]==1:
-        st.error("the employee is likely to leave the company.")
+    if prediction[0]==1:
+        st.error("The employee is likely to leave the company.")
     else:
         st.success("The employee is likely to stay with the company.")
 if st.button("Predict Probability"):
     proba=model.predict_proba(input_df)
-    prediction_proba=model.predict(input_df)  
+    prediction_parabola=model.predict(input_df)
     st.subheader("Prediction Probability")
-    st.write(f"Probability of leaving: {prediction_proba[0][1]:,2f}")
-    st.write(f"Probability of staying: {prediction_proba[0][0]:,2f}")
-        
+    if prediction_parabola[0]==1:
+        st.error("The employee is likely to leave the company.")
+    else:
+        st.success("The employee is likely to stay with the company.")
+    st.subheader("Prediction Probability")
+    st.write(f"Probability of leaving: {proba[0][1]:.2f}")
+    st.write(f"Probability of staying: {proba[0][0]:.2f}")
