@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 model=joblib.load("assests/employee_attrition_model.pkl")
 label_encoder=joblib.load("assests/label_encoder.pkl")
-feature_columns=joblib.load("assets/feature_columns.pkl")
+feature_columns=joblib.load("assests/feature_columns.pkl")
 st.title("Employee Atrition Prediction")
 st.markdown("Enter the employee details to predit whether they are likely to leave the company.")
 st.sidebar.header("Employee Details")
