@@ -3,9 +3,9 @@ import joblib
 import numpy as np
 import pandas as pd
 # Load the trained model and label encoder
-model = joblib.load("EmployeeAttrition_1/employee_attrition_model.pkl")
-label_encoder = joblib.load("EmployeeAttrition_1/label_encoder.pkl")
-Feature_columns = joblib.load("EmployeeAttrition_1/feature_columns.pkl")
+model = joblib.load("assests/employee_attrition_model.pkl")
+label_encoder = joblib.load("assests/label_encoder.pkl")
+Feature_columns = joblib.load("assests/feature_columns.pkl")
 st.title("Employee Attrition Prediction")
 st.markdown("Enter the employee details to predict whether they are likely to leave the company.")
 st.sidebar.header("Employee Details")
